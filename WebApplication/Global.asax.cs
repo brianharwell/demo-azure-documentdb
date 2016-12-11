@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Reflection;
 using System.Web;
+using System.Web.Compilation;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -47,6 +49,10 @@ namespace WebApplication
 
             // CUSTOM REGISTRATIONS
             builder.Register(context => HttpContext.Current.GetOwinContext().Authentication).As<IAuthenticationManager>();
+
+            var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().ToArray();
+
+            builder.RegisterAssemblyTypes(assemblies).Where(x => x.FullName.Contains("WebApplication")).AsImplementedInterfaces();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

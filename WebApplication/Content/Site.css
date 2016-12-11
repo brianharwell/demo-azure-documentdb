@@ -8,3 +8,9 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.field-validation-error {
+    color: #a94442;
+    font-weight: bold;
+}
+

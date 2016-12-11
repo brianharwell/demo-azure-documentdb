@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
@@ -20,13 +19,7 @@ namespace WebApplication
             cookieAuthenticationOptions.ExpireTimeSpan = TimeSpan.FromMinutes(5);
             cookieAuthenticationOptions.LoginPath = new PathString("/account/signin");
             cookieAuthenticationOptions.LogoutPath = new PathString("/home");
-            cookieAuthenticationOptions.Provider = new DemoCookieAuthenticationProvider()
-            {
-                OnValidateIdentity = context =>
-                {
-                    return Task.FromResult(0);
-                }
-            };
+            cookieAuthenticationOptions.Provider = new DemoCookieAuthenticationProvider();
 
             app.UseCookieAuthentication(cookieAuthenticationOptions);
         }
